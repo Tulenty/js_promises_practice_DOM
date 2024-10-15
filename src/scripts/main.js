@@ -31,21 +31,19 @@ let rightClick = false;
 
 const thirdPromise = new Promise((resolve) => {
   document.addEventListener('click', (e) => {
-    if (e.button === 0) {
-      leftClick = true;
-    }
-
-    if (e.button === 2) {
-      rightClick = true;
-    }
-
-    if (leftClick && rightClick) {
-      resolve('Third promise was resolved');
-
-      leftClick = false;
-      rightClick = false;
-    }
+    leftClick = true;
   });
+
+  document.addEventListener('contextmenu', (e) => {
+    rightClick = true;
+  });
+
+  if (leftClick && rightClick) {
+    resolve('Third promise was resolved');
+
+    leftClick = false;
+    rightClick = false;
+  }
 });
 
 const showshowNotification = (message, isError = false) => {
